@@ -1,5 +1,5 @@
 <div>
   <h3>Alerty</h3>
-  <button (click)="onClick()">Pobierz</button>
+  <button (click)="onClick()" [disabled]="isLoading">{{!isLoading ? 'Pobierz' : 'Proszę czekać...'}}</button>
   <app-info-panel *ngIf="displayInfoPanel" [displayOk]="operationResult" />
 </div>

@@ -10,18 +10,21 @@ import IAlert from '../../Types/IAlert';
 export class DataBtnComponent {
   displayInfoPanel: boolean = false;
   operationResult: boolean = false;
+  isLoading: boolean = false;
 
   constructor(private alertsService: AlertsService) { }
 
   onClick() {
     this.displayInfoPanel = false;
     this.operationResult = false;
+    this.isLoading = true;
     this.alertsService.getAlertsCsv().subscribe(response => this.handleResponseSuccess(response), error => this.handleResponseFailed(error));
   }
 
   handleResponseSuccess(response: any) {
     this.operationResult = true;
     this.displayInfoPanel = true;
+    this.isLoading = false;
 
     var a = document.createElement("a");
     document.body.appendChild(a);
@@ -38,6 +41,7 @@ export class DataBtnComponent {
   handleResponseFailed(error: any) {
     this.operationResult = false;
     this.displayInfoPanel = true;
+    this.isLoading = false;
 
     console.log(error);
   }
