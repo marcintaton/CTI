@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CTI.Migrations
 {
     [DbContext(typeof(CtiDbContext))]
-    [Migration("20230710065843_AlertLevelNameChange")]
-    partial class AlertLevelNameChange
+    [Migration("20230710103052_Main")]
+    partial class Main
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
