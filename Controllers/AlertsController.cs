@@ -28,16 +28,23 @@ namespace CTI.Controllers
         [HttpGet("[action]")]
         public IActionResult GetCsv()
         {
-            var sb = new StringBuilder();
-            var sw = new StringWriter(sb);
-            using (var csv = new CsvWriter(sw, CultureInfo.InvariantCulture))
+            try
             {
-                csv.WriteRecords(_context.Alerts);
+                var sb = new StringBuilder();
+                var sw = new StringWriter(sb);
+                using (var csv = new CsvWriter(sw, CultureInfo.InvariantCulture))
+                {
+                    csv.WriteRecords(_context.Alerts);
+                }
+
+                var bytes = Encoding.UTF8.GetBytes(sw.ToString());
+
+                return Ok(File(bytes, "text/csv", "alerts.csv"));
+            } catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
-
-            var bytes = Encoding.UTF8.GetBytes(sw.ToString());
-
-            return Ok(File(bytes, "text/csv", "alerts.csv"));
+            
         }
 
         [HttpPost]
